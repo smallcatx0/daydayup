@@ -115,3 +115,25 @@ func Test_783(t *testing.T) {
 	ret := minDiffInBST(root)
 	fmt.Println("ret=", ret)
 }
+
+// #796. 旋转字符串
+func rotateString(s string, goal string) bool {
+	l := len(s)
+	for i := 0; i < l; i++ {
+		if goal[0] == s[i] {
+			s2 := s[i:] + s[:i]
+			fmt.Println(string(s2))
+			if s2 == goal {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func Test_796(t *testing.T) {
+	s := "bbbacddceeb"
+	goal := "ceebbbbacdd"
+	ret := rotateString(s, goal)
+	fmt.Println(ret)
+}
