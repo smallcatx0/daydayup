@@ -273,3 +273,36 @@ func Test_819(t *testing.T) {
 	ret := mostCommonWord(p, ban)
 	fmt.Println(ret)
 }
+
+// #821. 字符的最短距离
+
+func shortestToChar(s string, c byte) []int {
+	l := len(s)
+	ans := make([]int, l)
+	r := 0
+	p := []int{}
+	for i := 0; i < l; i++ {
+		if s[i] == c {
+			p = append(p, i)
+			ans[i] = 0
+			r += 1
+		}
+	}
+	if r == l {
+		return ans
+	}
+	pi := 0
+	for i := 0; i < l; i++ {
+		if i != p[pi] {
+
+		}
+	}
+	return ans
+}
+
+func Test_821(t *testing.T) {
+	s := "loveleetcode"
+	c := byte('e')
+	ret := shortestToChar(s, c)
+	fmt.Println(ret)
+}
