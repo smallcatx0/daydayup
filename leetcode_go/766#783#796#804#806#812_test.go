@@ -3,6 +3,7 @@ package leetcode
 import (
 	"bytes"
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -226,5 +227,49 @@ func Test_812(t *testing.T) {
 		{9, 7}, {6, 10}, {1, 10}, {2, 7},
 	}
 	ret := largestTriangleArea(points)
+	fmt.Println(ret)
+}
+
+// #819. 最常见的单词
+func mostCommonWord(paragraph string, banned []string) string {
+	m := map[string]int{}
+	ban := map[string]bool{}
+	for _, word := range banned {
+		ban[word] = true
+	}
+	l := -1
+	pre, now := false, false
+	max := 0
+	ret := ""
+	for i, c := range paragraph + " " {
+		now = isLetter(c)
+		if pre == false && now == true {
+			// 上跳变: 记录起点
+			l = i
+		}
+		if pre == true && now == false {
+			// 下跳变: 记录单词
+			word := strings.ToLower(paragraph[l:i])
+			if !ban[word] {
+				m[word] += 1
+				if m[word] > max {
+					max = m[word]
+					ret = word
+				}
+			}
+		}
+		pre = now
+	}
+	return ret
+}
+
+func isLetter(c rune) bool {
+	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+}
+
+func Test_819(t *testing.T) {
+	p := "Bob hit a ball, the hit BALL flew far after it was hit."
+	ban := []string{"hit"}
+	ret := mostCommonWord(p, ban)
 	fmt.Println(ret)
 }
