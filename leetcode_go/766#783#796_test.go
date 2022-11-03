@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"bytes"
 	"fmt"
 	"testing"
 )
@@ -135,5 +136,34 @@ func Test_796(t *testing.T) {
 	s := "bbbacddceeb"
 	goal := "ceebbbbacdd"
 	ret := rotateString(s, goal)
+	fmt.Println(ret)
+}
+
+// #804. 唯一摩尔斯密码词
+var mores = []string{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."}
+
+func uniqueMorseRepresentations(words []string) int {
+	s := map[string]bool{}
+	for _, word := range words {
+		if m := word2mores(word); !s[m] {
+			s[m] = true
+		}
+	}
+	return len(s)
+}
+
+func word2mores(word string) string {
+	var m bytes.Buffer
+	for i := 0; i < len(word); i++ {
+		// fmt.Println(word[i] - 'a')
+		m.WriteString(mores[word[i]-'a'])
+	}
+	return m.String()
+}
+
+func Test_804(t *testing.T) {
+	words := []string{"gin", "zen", "gig", "msg"}
+	ret := uniqueMorseRepresentations(words)
+	// ret := word2mores("gin")
 	fmt.Println(ret)
 }
