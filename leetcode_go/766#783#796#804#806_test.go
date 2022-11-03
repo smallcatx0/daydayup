@@ -167,3 +167,28 @@ func Test_804(t *testing.T) {
 	// ret := word2mores("gin")
 	fmt.Println(ret)
 }
+
+// #806. 写字符串需要的行数
+func numberOfLines(widths []int, s string) []int {
+	max := 100
+	l := 1
+	for _, c := range s {
+		w := widths[c-'a']
+		if max-w < 0 {
+			// 行数加一
+			l += 1
+			max = 100 - w
+		} else {
+			max -= w
+		}
+	}
+	return []int{l, 100 - max}
+}
+
+func Test_806(t *testing.T) {
+	wd := []int{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
+	// s := "abcdefghijklmnopqrstuvwxyz"
+	s := "a"
+	ret := numberOfLines(wd, s)
+	fmt.Println(ret)
+}
