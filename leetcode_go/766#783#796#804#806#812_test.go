@@ -192,3 +192,39 @@ func Test_806(t *testing.T) {
 	ret := numberOfLines(wd, s)
 	fmt.Println(ret)
 }
+
+// #812. 最大三角形面积
+func largestTriangleArea(points [][]int) float64 {
+	// 最高点, 最低点,
+	if len(points) == 3 {
+		return float64(area2(points[0], points[1], points[2])) / 2
+	}
+	var maxs = 0
+	for i, p1 := range points {
+		// fmt.Println(p1, points[:i])
+		for j, p2 := range points[:i] {
+			for _, p3 := range points[:j] {
+				if s := area2(p1, p2, p3); s > int(maxs) {
+					maxs = s
+				}
+			}
+		}
+	}
+	return float64(maxs) / 2
+}
+
+func area2(p1, p2, p3 []int) int {
+	s := p1[0]*p2[1] + p2[0]*p3[1] + p3[0]*p1[1] - p1[0]*p3[1] - p2[0]*p1[1] - p3[0]*p2[1]
+	if s < 0 {
+		s = -s
+	}
+	return s
+}
+
+func Test_812(t *testing.T) {
+	points := [][]int{
+		{9, 7}, {6, 10}, {1, 10}, {2, 7},
+	}
+	ret := largestTriangleArea(points)
+	fmt.Println(ret)
+}
