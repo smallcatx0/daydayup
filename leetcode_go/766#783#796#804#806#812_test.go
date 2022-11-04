@@ -279,30 +279,43 @@ func Test_819(t *testing.T) {
 func shortestToChar(s string, c byte) []int {
 	l := len(s)
 	ans := make([]int, l)
-	r := 0
-	p := []int{}
+	p := []int{3 * l}
 	for i := 0; i < l; i++ {
 		if s[i] == c {
 			p = append(p, i)
 			ans[i] = 0
-			r += 1
 		}
 	}
-	if r == l {
-		return ans
-	}
-	pi := 0
+	p = append(p, 2*l)
+	fmt.Println(ans)
+	pi := 1
 	for i := 0; i < l; i++ {
-		if i != p[pi] {
-
+		if i > p[pi] {
+			pi += 1
 		}
+		ans[i] = abs_min(p[pi-1]-i, p[pi]-i)
+		// fmt.Println(p[pi-1], i, p[pi])
 	}
 	return ans
 }
-
+func abs_min(x, y int) int {
+	if x < 0 {
+		x = -x
+	}
+	if y < 0 {
+		y = -y
+	}
+	if x > y {
+		return y
+	} else {
+		return x
+	}
+}
 func Test_821(t *testing.T) {
-	s := "loveleetcode"
-	c := byte('e')
+	// "aaba"
+	// "b"
+	s := "baaaa"
+	c := byte('b')
 	ret := shortestToChar(s, c)
 	fmt.Println(ret)
 }
