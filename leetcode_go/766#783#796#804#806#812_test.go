@@ -58,10 +58,10 @@ func Test_766(t *testing.T) {
 		{5, 1, 2, 3},
 		{9, 5, 1, 2},
 	}
-	matrix = [][]int{
-		{1, 2},
-		{5, 2},
-	}
+	// matrix = [][]int{
+	// 	{1, 2},
+	// 	{5, 2},
+	// }
 	ret := isToeplitzMatrix(matrix)
 	fmt.Println(ret)
 }
