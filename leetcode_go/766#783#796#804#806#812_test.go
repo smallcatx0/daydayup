@@ -76,11 +76,6 @@ func Test_766(t *testing.T) {
  *     Right *TreeNode
  * }
  */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 func pre(root *TreeNode) []int {
 	if root == nil {
