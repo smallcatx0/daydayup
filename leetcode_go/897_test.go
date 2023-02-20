@@ -5,22 +5,27 @@ import (
 	"testing"
 )
 
-var head *TreeNode
+var preNode *TreeNode
+var r *TreeNode
 
 func increasingBST(root *TreeNode) *TreeNode {
-	head = &TreeNode{}
 	// 中序遍历
-	ldr(root, head)
-	return head.Right
+	ldr(root)
+	return r
 }
 
-func ldr(root *TreeNode, new *TreeNode) {
+func ldr(root *TreeNode) {
 	if root == nil {
 		return
 	}
-	ldr(root.Left, new)
-	new.Right = &TreeNode{Val: root.Val}
-	ldr(root.Right, new.Right)
+	ldr(root.Left)
+	// 中序的逻辑
+
+	root.Left = nil      // 当前节点的左分支 砍掉
+	preNode.Right = root // 生成单边树
+	preNode = root       // 当前节点记录为前驱节点
+
+	ldr(root.Right)
 }
 
 func Test_897(t *testing.T) {
